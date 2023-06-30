@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseAuth
 import Firebase
-import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class AuthService {
@@ -48,8 +47,7 @@ class AuthService {
     func loadUserData() async throws {
         self.userSession = Auth.auth().currentUser
         guard let currentUid = self.userSession?.uid else { return }
-        let snapShot = try await Firestore.firestore().collection("users").document(currentUid).getDocument()
-        self.currentUser = try? snapShot.data(as: User.self)
+        self.currentUser = try await UserService.fetchUser(withUid: currentUid)
     }
     
     func signOut() {
