@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Post: Identifiable, Codable, Hashable {
     let id: String
@@ -13,7 +14,7 @@ struct Post: Identifiable, Codable, Hashable {
     var caption: String
     var likes: Int
     let imageUrl: String
-    let timestamp: Date
+    let timestamp: Timestamp
     var user: User?
 }
 
@@ -24,7 +25,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 369,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[0]
         ),
         .init(id: NSUUID().uuidString,
@@ -32,7 +33,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 3693,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[1]
         ),
         .init(id: NSUUID().uuidString,
@@ -40,7 +41,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 36936,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[2]
         ),
         .init(id: NSUUID().uuidString,
@@ -48,7 +49,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 369369,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[3]
         ),
         .init(id: NSUUID().uuidString,
@@ -56,7 +57,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 3693693,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[4]
         ),
         .init(id: NSUUID().uuidString,
@@ -64,7 +65,7 @@ extension Post {
               caption: "This is some test caption for now.",
               likes: 36936936,
               imageUrl: "profilePicture1",
-              timestamp: Date(),
+              timestamp: Timestamp(),
               user: User.MOCK_USERS[5]
         ),
     ]

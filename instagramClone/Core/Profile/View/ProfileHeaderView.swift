@@ -11,15 +11,13 @@ struct ProfileHeaderView: View {
     
     let user: User
     
+    @State private var showEditProfile = false
+    
     var body: some View {
         VStack(spacing: 10) {
             // Profile pic and stats
             HStack {
-                Image(user.profileImageUrl ?? "avatar")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 90, height: 90)
-                    .clipShape(Circle())
+                CircularProfileImageView(user: user)
                 
                 Spacer()
                 
@@ -47,22 +45,31 @@ struct ProfileHeaderView: View {
             
             // Action button
             Button {
-                
+                if user.isCurrentUser {
+                    showEditProfile.toggle()
+                } else {
+                    print("Follow user...")
+                }
             } label: {
-                Text("Edit Profile")
+                Text(user.isCurrentUser ? "Edit Profile" : "Follow")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .frame(height: 32)
-                    .foregroundColor(.primary)
+                    .background(user.isCurrentUser ? .clear : Color(.systemBlue))
+                    .foregroundColor(user.isCurrentUser ? .primary : .white)
+                    .cornerRadius(6)
                     .overlay(
                         RoundedRectangle(cornerRadius: 6)
-                            .stroke(Color.gray, lineWidth: 1)
+                            .stroke(user.isCurrentUser ? Color.gray : .clear, lineWidth: 1)
                     )
             }
             
             Divider()
         }
         .padding(.horizontal)
+        .fullScreenCover(isPresented: $showEditProfile) {
+            EditProfileView(user: user)
+        }
     }
 }
